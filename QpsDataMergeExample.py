@@ -62,14 +62,17 @@ def main():
     filetypes = (("QPS files", "*.qps"))
     print("Please open the recording.")
     file_path = askopenfilename(title="Open the recording")
-    fp_arg = "-open=" + '"' + file_path + '"'
-    startLocalQps(args=[fp_arg])
-
-    # Wait for the trace to load
-    visual_sleep(60,1, "Waiting for QPS to fully load the trace")
-
+    #fp_arg = "-open=" + '"' + file_path + '"'
+    #startLocalQps(args=[fp_arg])
+    
     # Connect to local QPS
     myQPS = qpsInterface()
+    print(myQPS.sendCmdVerbose("$open recording qpsFile=\""+str(file_path)+"\""))
+
+    # Wait for the trace to load: TODO: replace with poll for QPS ready
+    visual_sleep(60,1, "Waiting for QPS to fully load the trace")
+
+    
 
     # Create new channels to for water input, measured in L (for liters) and allowing auto unti scaling (milli/micro)
     myNewGroup = 'Water'
