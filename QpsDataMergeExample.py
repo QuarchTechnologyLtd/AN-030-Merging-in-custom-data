@@ -81,6 +81,7 @@ def main():
     myBaseUnits = 'L'
     usePrefix = 'yes'
     timeFormat = 'elapsed'
+    merge_filename = ".\water_rates.csv"
     
     # Create the new channels
     myQPS.sendCmdVerbose("$create channel " + myRateChannel + " " + myNewGroup + " " + myBaseUnits + " " + usePrefix)
@@ -89,7 +90,7 @@ def main():
     # Our data to merge comes from a water meter, this produces a digital pulse for each unit of water.
     # The data has already been formatted into a rate and total amount channel, to be added to the chart
     line_num = 0
-    with open(filename, 'r') as file:
+    with open(merge_filename, 'r') as file:
         for line in file:
         
             # Skip header row
