@@ -46,44 +46,33 @@ from tkinter.filedialog import askopenfilename, askdirectory
 
 # Import QPS functions
 from quarchpy import qpsInterface, isQpsRunning, startLocalQps, GetQpsModuleSelection, getQuarchDevice, quarchDevice, quarchQPS, \
-    requiredQuarchpyVersion
-
+    requiredQuarchpyVersion,user_interface
+import re
 
 def main():
     # If required you can enable python logging, quarchpy supports this and your log file
     # will show the process of scanning devices and sending the commands.  Just comment out
     # the line below.  This can be useful to send to quarch if you encounter errors
     # logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
-
     print("\n\nQuarch application note example: AN-030")
     print("---------------------------------------\n\n")
-    
     # This is the file containing the user data that we will merge into the trace
     merge_filename = ".\water_rates.csv"
-
-    # Version 2.0.15 or higher expected for this application note
+    # Version 2.1.24 or higher expected for this application note
     requiredQuarchpyVersion("2.1.24")
-
-    # File paths for the example are set here, and can be altered to put your data files in a different location
-    # The path must be writable via a standard OS path
-    filePath = os.path.dirname(os.path.realpath(__file__))
 
     # Ask the user to select the QPS recording to open. This is the one that we will merge the data into
     root = Tk()
     root.withdraw()
     filetypes = (("QPS files", "*.qps"))
     print("Please open the recording.")
-    file_path = askopenfilename(title="Open the recording")
-    
+    file_path = askopenfilename(title="Open the recording",filetypes=filetypes)
+
     # Connect to local QPS
     myQPS = qpsInterface()
     # Open the archived recording
-    print(myQPS.sendCmdVerbose("$open recording qpsFile=\""+str(file_path)+"\""))
+    myQPS.open_recording(file_path=file_path)
 
-    # Wait for the trace to load: TODO: replace with poll for QPS ready
-    visual_sleep(45,1, "Waiting for QPS to fully load the trace")
-    print ("Trace load complete")
-    
 
     # Create new channels to for water input, measured in L (for liters) and allowing auto unti scaling (milli/micro)    
     usePrefix = 'No'
