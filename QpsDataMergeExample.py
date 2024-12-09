@@ -38,16 +38,12 @@ Custom User Data is intended to be 'sparse' (ie: perhaps 1 sample per second), a
 """
 
 # Import other libraries used in the examples
-import os
-import time
-from quarchpy.user_interface import printText, visual_sleep
 from tkinter import Tk
-from tkinter.filedialog import askopenfilename, askdirectory
+from tkinter.filedialog import askopenfilename
 
 # Import QPS functions
-from quarchpy import qpsInterface, isQpsRunning, startLocalQps, GetQpsModuleSelection, getQuarchDevice, quarchDevice, quarchQPS, \
-    requiredQuarchpyVersion,user_interface
-import re
+from quarchpy import qpsInterface, requiredQuarchpyVersion
+
 
 def main():
     # If required you can enable python logging, quarchpy supports this and your log file
@@ -64,7 +60,7 @@ def main():
     # Ask the user to select the QPS recording to open. This is the one that we will merge the data into
     root = Tk()
     root.withdraw()
-    filetypes = (("QPS files", "*.qps"))
+    filetypes = (("QPS files", "*.qps"),)
     print("Please open the recording.")
     file_path = askopenfilename(title="Open the recording",filetypes=filetypes)
 
