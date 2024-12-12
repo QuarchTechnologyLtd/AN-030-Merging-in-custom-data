@@ -56,7 +56,10 @@ def main():
     print("---------------------------------------\n\n")
 
     # This is the file containing the user data that we will merge into the trace
-    merge_filename = "\\EDIT-PATH-FILE\\water_rates.csv"  # eg; "C:\\temp\\csv_files\\water_rates.csv"
+    # The .csv file must contain a header of the form:
+    # "Time mS","Rate Flow mL/s","Total Volume L", ...
+    # That is, a < time, unit > column followed by < channel, group, unit > columns
+    merge_filename = "\\EDIT-PATH-FILE\\water_rates.csv"  # eg; "c:\\temp\\csv_files\\water_rates.csv"
     # Version 2.1.24 or higher expected for this application note
     requiredQuarchpyVersion("2.1.24")
 
