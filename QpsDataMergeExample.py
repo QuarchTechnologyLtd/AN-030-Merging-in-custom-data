@@ -12,7 +12,8 @@ file or provide your own.
 
 23/04/2024 - Andy Norrie    - First Version
 10/12/2024 - Graham Seed    - Use of "$stream import" command to speedup loading CSV data
-23/12/2024  - Stuart Boon   - Making the script more generic and providing a qps stream and csv file.
+23/12/2024 - Stuart Boon    - Making the script more generic and providing a qps stream and csv file
+
 ########### REQUIREMENTS ##############
 
 1- Python (3.x recommended)
@@ -129,6 +130,7 @@ def copy_recording_folder_add_timestamp(file_path):
     # Compute the path to the copied file
     new_file_path = os.path.join(destination_folder, os.path.basename(file_path))
     return new_file_path
+
 
 # Calling the main() function
 if __name__ == "__main__":
